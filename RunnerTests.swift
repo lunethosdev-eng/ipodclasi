@@ -1,5 +1,5 @@
-import FlutterMacOS
-import Cocoa
+import Flutter
+import UIKit
 import XCTest
 
 class RunnerTests: XCTestCase {
