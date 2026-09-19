@@ -6,18 +6,21 @@
 
 #include "generated_plugin_registrant.h"
 
-#include <media_kit_libs_linux/media_kit_libs_linux_plugin.h>
-#include <url_launcher_linux/url_launcher_plugin.h>
-#include <volume_controller/volume_controller_plugin.h>
+#include <battery_plus/battery_plus_windows_plugin.h>
+#include <media_kit_libs_windows_audio/media_kit_libs_windows_audio_plugin_c_api.h>
+#include <permission_handler_windows/permission_handler_windows_plugin.h>
+#include <url_launcher_windows/url_launcher_windows.h>
+#include <volume_controller/volume_controller_plugin_c_api.h>
 
-void fl_register_plugins(FlPluginRegistry* registry) {
-  g_autoptr(FlPluginRegistrar) media_kit_libs_linux_registrar =
-      fl_plugin_registry_get_registrar_for_plugin(registry, "MediaKitLibsLinuxPlugin");
-  media_kit_libs_linux_plugin_register_with_registrar(media_kit_libs_linux_registrar);
-  g_autoptr(FlPluginRegistrar) url_launcher_linux_registrar =
-      fl_plugin_registry_get_registrar_for_plugin(registry, "UrlLauncherPlugin");
-  url_launcher_plugin_register_with_registrar(url_launcher_linux_registrar);
-  g_autoptr(FlPluginRegistrar) volume_controller_registrar =
-      fl_plugin_registry_get_registrar_for_plugin(registry, "VolumeControllerPlugin");
-  volume_controller_plugin_register_with_registrar(volume_controller_registrar);
+void RegisterPlugins(flutter::PluginRegistry* registry) {
+  BatteryPlusWindowsPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("BatteryPlusWindowsPlugin"));
+  MediaKitLibsWindowsAudioPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("MediaKitLibsWindowsAudioPluginCApi"));
+  PermissionHandlerWindowsPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("PermissionHandlerWindowsPlugin"));
+  UrlLauncherWindowsRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("UrlLauncherWindows"));
+  VolumeControllerPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("VolumeControllerPluginCApi"));
 }
